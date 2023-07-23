@@ -4,8 +4,21 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const heart = document.getElementsByClassName("like-glyph")
+const heartArray = [...heart]
 
-
+heartArray.forEach((heart) =>
+  heart.addEventListener('click', (e) => {
+    mimicServerCall() 
+    .then(() => {
+      e.target.innerHTML = '♥'
+      e.target.parentElement.classList.add('activated-heart')
+    })
+    .catch(() => {
+      document.body.classList.remove("hidden")
+    })
+  })
+)
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response

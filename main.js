@@ -6,17 +6,26 @@ const FULL_HEART = '♥'
 
 const heart = document.getElementsByClassName("like-glyph")
 const heartArray = [...heart]
+const modal = document.getElementById("modal")
 
 heartArray.forEach((heart) =>
   heart.addEventListener('click', (e) => {
+    if(heart.innerHTML === '♡')
     mimicServerCall() 
     .then(() => {
       e.target.innerHTML = '♥'
       e.target.parentElement.classList.add('activated-heart')
     })
     .catch(() => {
-      document.body.classList.remove("hidden")
-    })
+      modal.classList.remove("hidden")
+      setTimeout(() => {
+        modal.classList.add("hidden")
+      }, 3000);
+    });
+    else{
+      e.target.innerHTML = '♡'
+      e.target.parentElement.classList.remove('activated-heart')
+    }
   })
 )
 
